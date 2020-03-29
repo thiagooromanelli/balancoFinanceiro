@@ -6,13 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BalancoFinanceiro.Models
 {
-    public class LancamentoContext : DbContext
+    public class BalancoFinanceiroContext : DbContext
     {
-        public LancamentoContext(DbContextOptions<LancamentoContext> options):base(options)
+        public BalancoFinanceiroContext(DbContextOptions<BalancoFinanceiroContext> options):base(options)
         {
             
         }
 
         public DbSet<Lancamento> Lancamentos { get; set; }
+        public DbSet<BalancoDia> BalancosDiarios { get; set; }
     }
 }

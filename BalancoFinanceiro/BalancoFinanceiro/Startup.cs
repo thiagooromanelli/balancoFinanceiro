@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
 
 namespace BalancoFinanceiro
 {
@@ -27,8 +28,10 @@ namespace BalancoFinanceiro
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<LancamentoContext>(options =>
+            services.AddDbContext<BalancoFinanceiroContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SQLServerConnection")));
+            services.AddMvc()
+                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
