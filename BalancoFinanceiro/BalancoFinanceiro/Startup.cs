@@ -12,6 +12,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
+using BalancoFinanceiro.Options;
+using Microsoft.OpenApi.Models;
 
 namespace BalancoFinanceiro
 {
@@ -32,6 +34,13 @@ namespace BalancoFinanceiro
                 options.UseSqlServer(Configuration.GetConnectionString("SQLServerConnection")));
             services.AddMvc()
                 .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
+
+            services.AddSwaggerGen(x =>
+            {
+                x.SwaggerDoc(
+                    "v1",
+                    new OpenApiInfo { Title = "BalancoFinanceiroAPI", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +57,18 @@ namespace BalancoFinanceiro
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            var swaggerOptions = new SwaggerOptions();
+            Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
+            app.UseSwagger(option =>
+            {
+                option.RouteTemplate = swaggerOptions.JsonRoute;
+            });
+
+            app.UseSwaggerUI(option =>
+            {
+                option.SwaggerEndpoint(swaggerOptions.UiEndpoint, swaggerOptions.Description);
             });
         }
     }
