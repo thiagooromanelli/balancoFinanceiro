@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BalancoFinanceiro.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace BalancoFinanceiro
 {
@@ -25,6 +27,8 @@ namespace BalancoFinanceiro
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<LancamentoContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("SQLServerConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,7 +41,6 @@ namespace BalancoFinanceiro
 
             app.UseRouting();
 
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
