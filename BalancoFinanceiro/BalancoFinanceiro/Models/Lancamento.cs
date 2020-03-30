@@ -10,14 +10,14 @@ namespace BalancoFinanceiro.Models
     public class Lancamento
     {
         [Key]
-        public int Id { get; set; }
+        public int id { get; set; }
         [Required]
-        public DataType Date { get; set; }
+        public string date { get; set; }
         [Required]
-        public double Value { get; set; }
+        public double value { get; set; }
         [Required]
-        public string Type { get; set; }
+        public string type { get; set; }
         [Required]
-        public string Status { get; set; }
+        public string status { get; set; }
     }
 }

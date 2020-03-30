@@ -41,6 +41,7 @@ namespace BalancoFinanceiro
                     "v1",
                     new OpenApiInfo { Title = "BalancoFinanceiroAPI", Version = "v1" });
             });
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +51,11 @@ namespace BalancoFinanceiro
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(options =>
+                options.WithOrigins("http://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
 
             app.UseRouting();
 

@@ -47,7 +47,7 @@ namespace BalancoFinanceiro.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutLancamento(int id, Lancamento lancamento)
         {
-            if (id != lancamento.Id)
+            if (id != lancamento.id)
             {
                 return BadRequest();
             }
@@ -82,7 +82,7 @@ namespace BalancoFinanceiro.Controllers
             _context.Lancamentos.Add(lancamento);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetLancamento", new { id = lancamento.Id }, lancamento);
+            return CreatedAtAction("GetLancamento", new { id = lancamento.id }, lancamento);
         }
 
         // DELETE: api/Lancamentos/5
@@ -103,7 +103,7 @@ namespace BalancoFinanceiro.Controllers
 
         private bool LancamentoExists(int id)
         {
-            return _context.Lancamentos.Any(e => e.Id == id);
+            return _context.Lancamentos.Any(e => e.id == id);
         }
     }
 }
