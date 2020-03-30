@@ -1,0 +1,21 @@
+<h6 class="display-5 text-center">Lista de Lançamentos</h6>
+<table class="table table-hover">
+    <tr>
+        <th>Id</th>
+        <th>Data</th>
+        <th>Valor</th>
+        <th>Status</th>
+        <th>Tipo</th>
+        <th></th>
+      </tr>
+    <tr *ngFor="let pd of service.list">
+      <td (click)="populateForm(pd)">{{pd.id}}</td>
+      <td (click)="populateForm(pd)">{{pd.date}}</td>
+      <td (click)="populateForm(pd)">{{pd.value}}</td>
+      <td (click)="populateForm(pd)">{{pd.status}}</td>
+      <td (click)="populateForm(pd)">{{pd.type}}</td>
+      <td>
+        <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(pd.id)"></i>
+      </td>
+    </tr>
+  </table>
