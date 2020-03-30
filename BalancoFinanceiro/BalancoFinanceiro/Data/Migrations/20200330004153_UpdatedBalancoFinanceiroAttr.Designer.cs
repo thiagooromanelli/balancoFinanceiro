@@ -3,14 +3,16 @@ using BalancoFinanceiro.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BalancoFinanceiro.Migrations
 {
     [DbContext(typeof(BalancoFinanceiroContext))]
-    partial class BalancoFinanceiroContextModelSnapshot : ModelSnapshot
+    [Migration("20200330004153_UpdatedBalancoFinanceiroAttr")]
+    partial class UpdatedBalancoFinanceiroAttr
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
