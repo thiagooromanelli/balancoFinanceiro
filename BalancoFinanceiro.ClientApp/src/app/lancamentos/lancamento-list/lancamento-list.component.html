@@ -1,0 +1,27 @@
+<h6 class="display-5 text-center">Lista de Lançamentos</h6>
+<cdk-virtual-scroll-viewport itemSize=20 style="height: 270px; width: 100%;">
+<table class="table table-hover">
+  
+  <tr>
+    <th>Id</th>
+    <th>Data</th>
+    <th>Valor</th>
+    <th>Status</th>
+    <th>Tipo</th>
+    <th></th>
+  </tr>
+
+  <tr *cdkVirtualFor="let pd of service.list">
+    <td (click)="populateForm(pd)">{{pd.id}}</td>
+    <td (click)="populateForm(pd)">{{pd.date}}</td>
+    <td (click)="populateForm(pd)">R$ {{pd.value | number : '1.2-2'}}</td>
+    <td (click)="populateForm(pd)">{{pd.status ? "Não conciliado" : "Conciliado"}}</td>
+    <td (click)="populateForm(pd)">{{pd.type ? "Débito" : "Crédito"}}</td>
+    <td>
+      <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(pd)"></i>
+    </td>
+  </tr>
+  
+
+</table>
+</cdk-virtual-scroll-viewport>

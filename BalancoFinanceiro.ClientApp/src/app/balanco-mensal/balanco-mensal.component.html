@@ -1,0 +1,59 @@
+<h4>Gerar Balanço Mensal</h4>
+<br>
+<div class="row">
+    <div class="col-md-5">
+        <h6 class="display-5 text-center">Escolha um mês...</h6>
+        <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01" style="width: 80px;">Mês</label>
+                    </div>
+                    <select name="month" #month="ngModel" [(ngModel)]="service.month" class="custom-select"
+                        id="inputGroupSelect01" placeholder="Escolha o status" required>
+                        <option type="number" value="01">Janeiro</option>
+                        <option type="number" value="02">Fevereiro</option>
+                        <option type="number" value="03">Março</option>
+                        <option type="number" value="04">Abril</option>
+                        <option type="number" value="05">Maio</option>
+                        <option type="number" value="06">Junho</option>
+                        <option type="number" value="07">Julho</option>
+                        <option type="number" value="08">Agosto</option>
+                        <option type="number" value="09">Setembro</option>
+                        <option type="number" value="10">Outubro</option>
+                        <option type="number" value="11">Novembro</option>
+                        <option type="number" value="12">Dezembro</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success btn-md btn-block" type="submit" [disabled]="form.invalid">Enviar</button>
+            </div>
+        </form>
+
+    </div>
+    <div class="col-md-7">
+        <h6 class="display-5 text-center">Resultado</h6>
+        <cdk-virtual-scroll-viewport itemSize=20 style="height: 150px; width: 100%;">
+            <table class="table table-hover">
+                <tr>
+                    <th>Data</th>
+                    <th>Valor Total Crédito</th>
+                    <th>Valor Total Débito</th>
+                    <th>Saldo do dia</th>
+                </tr>
+
+                <tr *cdkVirtualFor="let pd of service.formDataBalancoMensalResp.item1">
+                    <td>{{pd.date}}</td>
+                    <td>R$ {{pd.totValCredit | number : '1.2-2'}}</td>
+                    <td>R$ {{pd.totValDebit | number : '1.2-2'}}</td>
+                    <td>R$ {{pd.balance | number : '1.2-2'}}</td>
+                </tr>
+            </table>
+        </cdk-virtual-scroll-viewport>
+        <br>
+        <h6 class="display text-right">Saldo Total Mensal: R$
+            {{service.formDataBalancoMensalResp.item2 | number : '1.2-2'}}</h6>
+    </div>
+</div>
+<br><br><br>
