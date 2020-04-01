@@ -1,0 +1,50 @@
+<h4>Gerar Balanço Diário</h4>
+<br>
+<div class="row">
+    <div class="col-md-5">
+        <h6 class="display-5 text-center">Escolha uma data...</h6>
+        <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <div class="form-group">
+                <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" style="width: 80px;">Data</span>
+                    </div>
+                    <input name="date" #date="ngModel" [(ngModel)]="service.formDataBalanco.date"
+                        class="form-control datetimepicker-input" data-target="#datetimepicker2" required />
+                    <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker2').datetimepicker({
+                            viewMode: 'years',
+                            format: 'MM/DD/YYYY'
+                        });
+                    });
+                </script>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success btn-md btn-block" type="submit" [disabled]="form.invalid">Enviar</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-7">
+        <h6 class="display-5 text-center">Resultado</h6>
+        <table class="table table-hover">
+            <tr>
+                <th>Data</th>
+                <th>Valor Total Crédito</th>
+                <th>Valor Total Débito</th>
+                <th>Saldo do dia</th>
+            </tr>
+
+            <tr *ngFor="let pd of service.list">
+                <td>{{pd.date}}</td>
+                <td>R$ {{pd.totValCredit | number : '1.2-2'}}</td>
+                <td>R$ {{pd.totValDebit | number : '1.2-2'}}</td>
+                <td>R$ {{pd.balance | number : '1.2-2'}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
