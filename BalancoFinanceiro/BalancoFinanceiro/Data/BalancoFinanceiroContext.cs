@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace BalancoFinanceiro.Models
+namespace BalancoFinanceiro.Domain.Models
 {
     public class BalancoFinanceiroContext : DbContext
     {
@@ -14,6 +14,5 @@ namespace BalancoFinanceiro.Models
         }
 
         public DbSet<Lancamento> Lancamentos { get; set; }
-        public DbSet<BalancoDia> BalancosDiarios { get; set; }
     }
 }
