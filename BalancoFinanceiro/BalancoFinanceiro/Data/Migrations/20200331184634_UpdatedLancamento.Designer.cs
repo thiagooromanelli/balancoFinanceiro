@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BalancoFinanceiro.Migrations
 {
     [DbContext(typeof(BalancoFinanceiroContext))]
-    [Migration("20200330003132_UpdatedBalancoFinanceiro")]
-    partial class UpdatedBalancoFinanceiro
+    [Migration("20200331184634_UpdatedLancamento")]
+    partial class UpdatedLancamento
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,48 +20,46 @@ namespace BalancoFinanceiro.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BalancoFinanceiro.Models.BalancoDia", b =>
+            modelBuilder.Entity("BalancoFinanceiro.Domain.Models.BalancoDiario", b =>
                 {
-                    b.Property<int>("Date")
-                        .HasColumnType("int");
+                    b.Property<string>("date")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<double>("Balance")
+                    b.Property<double>("balance")
                         .HasColumnType("float");
 
-                    b.Property<double>("TotValCredit")
+                    b.Property<double>("totValCredit")
                         .HasColumnType("float");
 
-                    b.Property<double>("TotValDebit")
+                    b.Property<double>("totValDebit")
                         .HasColumnType("float");
 
-                    b.HasKey("Date");
+                    b.HasKey("date");
 
                     b.ToTable("BalancosDiarios");
                 });
 
-            modelBuilder.Entity("BalancoFinanceiro.Models.Lancamento", b =>
+            modelBuilder.Entity("BalancoFinanceiro.Domain.Models.Lancamento", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Date")
+                    b.Property<string>("date")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("status")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("type")
+                        .HasColumnType("int");
 
-                    b.Property<double>("Value")
+                    b.Property<double>("value")
                         .HasColumnType("float");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.ToTable("Lancamentos");
                 });

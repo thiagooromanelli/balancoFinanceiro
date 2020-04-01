@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BalancoFinanceiro.Migrations
 {
     [DbContext(typeof(BalancoFinanceiroContext))]
-    [Migration("20200330003132_UpdatedBalancoFinanceiro")]
-    partial class UpdatedBalancoFinanceiro
+    [Migration("20200331140727_DeletedBalancoDia")]
+    partial class DeletedBalancoDia
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,48 +20,29 @@ namespace BalancoFinanceiro.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BalancoFinanceiro.Models.BalancoDia", b =>
-                {
-                    b.Property<int>("Date")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Balance")
-                        .HasColumnType("float");
-
-                    b.Property<double>("TotValCredit")
-                        .HasColumnType("float");
-
-                    b.Property<double>("TotValDebit")
-                        .HasColumnType("float");
-
-                    b.HasKey("Date");
-
-                    b.ToTable("BalancosDiarios");
-                });
-
             modelBuilder.Entity("BalancoFinanceiro.Models.Lancamento", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Date")
+                    b.Property<string>("date")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Status")
+                    b.Property<string>("status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
+                    b.Property<string>("type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Value")
+                    b.Property<double>("value")
                         .HasColumnType("float");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.ToTable("Lancamentos");
                 });
