@@ -12,7 +12,7 @@
     "BalancoFinanceiro": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/Lancamentos",
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
