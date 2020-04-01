@@ -22,7 +22,7 @@
 ![image info](./md-img/preview.jpeg)
 
 ### Swagger
-![image info](./md-img/swagger.png)
+![image info](./md-img/swagger.jpeg)
 
 License
 ----
