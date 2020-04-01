@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BalancoFinanceiro.Domain.Enum;
+using BalancoFinanceiro.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BalancoFinanceiro.Models;
 
 namespace BalancoFinanceiro.Controllers
 {
@@ -48,6 +49,11 @@ namespace BalancoFinanceiro.Controllers
         public async Task<IActionResult> PutLancamento(int id, Lancamento lancamento)
         {
             if (id != lancamento.id)
+            {
+                return BadRequest();
+            }
+
+            if (LancamentoConciliado(id))
             {
                 return BadRequest();
             }
@@ -95,6 +101,11 @@ namespace BalancoFinanceiro.Controllers
                 return NotFound();
             }
 
+            if (LancamentoConciliado(id))
+            {
+                return BadRequest();
+            }
+
             _context.Lancamentos.Remove(lancamento);
             await _context.SaveChangesAsync();
 
@@ -104,6 +115,11 @@ namespace BalancoFinanceiro.Controllers
         private bool LancamentoExists(int id)
         {
             return _context.Lancamentos.Any(e => e.id == id);
+        }
+
+        private bool LancamentoConciliado(int id)
+        {
+            return _context.Lancamentos.Any(e => e.id == id && e.status == (int)LancamentoStatus.Conciliado);
         }
     }
 }
